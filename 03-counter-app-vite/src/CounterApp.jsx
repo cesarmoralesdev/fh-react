@@ -12,6 +12,9 @@ const CounterApp = ({ value }) => {
         setCounter(counter + 1);
     }
 
+    const handleSubtract = () => setCounter(counter - 1);
+    const handleReset = () => setCounter(value);
+
     const schema = z.object({ value: z.number() });
 
     const validatedValue = schema.parse({ value });
@@ -21,6 +24,8 @@ const CounterApp = ({ value }) => {
             <h1>CounterApp</h1>
             <h2>{counter}</h2>
             <button onClick={ handleAdd }>+</button>
+            <button onClick={ handleSubtract }>-</button>
+            <button onClick={ handleReset }>Reset</button>
         </>
     );
 }
