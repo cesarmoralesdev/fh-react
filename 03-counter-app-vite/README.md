@@ -22,5 +22,20 @@ Cambiar extensión de los archivos jest.config.js y babel.config.js a .cjs
 
 Para ver mas detalles al respecto pueden ir a https://nodejs.org/docs/latest/api/modules.html#enabling.
 
+yarn add --dev jest
+
+{
+  "scripts": {
+    "test": "jest"
+  }
+}
+
+yarn add --dev babel-jest @babel/core @babel/preset-env
+
+
+
+
+
+
 
 
