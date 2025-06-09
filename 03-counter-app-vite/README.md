@@ -32,6 +32,15 @@ yarn add --dev jest
 
 yarn add --dev babel-jest @babel/core @babel/preset-env
 
+Testing para javascript, orientada a aserciones y mocks de funciones que necesito evaluar, por ejemplo que llego al backend
+https://jestjs.io/docs/tutorial-react
+
+yarn add --dev @testing-library/react
+
+Testing componentes de React, orientada a interacciones de usuarios
+https://testing-library.com/docs/react-testing-library/intro
+
+
 
 
 
