@@ -41,10 +41,22 @@ Testing componentes de React, orientada a interacciones de usuarios
 https://testing-library.com/docs/react-testing-library/intro
 
 
+--Inatalar para hacer pruebas al component, previamente configurar el archivo jest.config.js
+
+yarn add -D jest-environment-jsdom
+yarn add -D @babel/preset-react
 
 
+solucion error:  Cannot find module '@testing-library/dom' from 'node_modules/@testing-library/react/dist/pure.js'
 
+yarn add --dev @testing-library/dom
 
+El siguiente codigo genera un snapshot, el cual genera un archivo con la foto actual del componente, por ejemplo si hubo un cambio, despues de generar la foto, saldra un error con la parte que esta distinta entre nuestro componente y el snapshot.
+Esto es recomendable para componentes que no cambian tanto.
+Si queremos actualizar la snapshot, presionamos u
+expect( container ).toMatchSnapshot();
+
+https://github.com/Klerith/react-vite-counter-app/tree/fin-seccion-5
 
 
 

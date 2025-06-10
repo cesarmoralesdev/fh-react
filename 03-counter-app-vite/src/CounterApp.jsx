@@ -3,7 +3,6 @@ import { z } from 'zod';
 
 
 const CounterApp = ({ value }) => {
-    console.log("call component");
     const [counter, setCounter] = useState(value);
 
     //Se puede poner la funcion fuera del componente (siempre y cuando no necesite un parametro del componete), pero solo funcionaria la primera vez que carga el componente, si se actualiza se perderia la referencia a la funcion
@@ -25,7 +24,7 @@ const CounterApp = ({ value }) => {
             <h2>{counter}</h2>
             <button onClick={ handleAdd }>+</button>
             <button onClick={ handleSubtract }>-</button>
-            <button onClick={ handleReset }>Reset</button>
+            <button aria-label='btn-reset' onClick={ handleReset }>Reset</button>
         </>
     );
 }

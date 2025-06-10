@@ -5,9 +5,9 @@ export const FirstApp = (props) => {
 
     // Define el esquema de Zod
     const schema = z.object({
-        title: z.string().default("No hay titulo"),
-        subtitle: z.string().optional(), // Agregué subtitle al esquema si lo usas
-        name: z.string(),
+        title: z.string(),
+        subtitle: z.string().default("No hay subtitulo"), // Agregué subtitle al esquema si lo usas
+        name: z.string().optional(),
     });
 
     // Parsea los props y obtén el objeto validado con los defaults aplicados
@@ -18,7 +18,9 @@ export const FirstApp = (props) => {
 
     return (
         <>
-            <h1>{title}</h1>
+            <h1 data-testid="test-title">{title}</h1>
+            {/* <div data-testid="test-title">{title}</div> */}
+            <p>{subtitle}</p>
             <p>{subtitle}</p>
             <p>{name}</p>
         </>
