@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AddCategory } from './components/AddCategory';
 
 export const GifExpertApp = () => {
 
@@ -16,9 +17,10 @@ export const GifExpertApp = () => {
     return (
         <>
             {/* titulo */}
-            <h1>GifExpertApp</h1>
+            <h3>GifExpertApp</h3>
 
             {/* input */}
+            <AddCategory />
 
             {/* listado de Gif */}
             <button onClick={onAddCategory}>Agregar categoria</button>
