@@ -12,6 +12,11 @@ export const GifExpertApp = () => {
             ...categories,
             value
         ]);
+        //Forma 2: Con esta forma dentro del setState tenemos el valor de estado
+        // setCategories(cat => [
+        //     ...cat,
+        //     value
+        // ]);
     }
 
     return (
@@ -20,7 +25,10 @@ export const GifExpertApp = () => {
             <h3>GifExpertApp</h3>
 
             {/* input */}
-            <AddCategory setCategories={setCategories} />
+            <AddCategory 
+                // setCategories={setCategories}
+                onNewCategory = { value => onAddCategory(value)}
+            />
 
             {/* listado de Gif */}
             <ol>
