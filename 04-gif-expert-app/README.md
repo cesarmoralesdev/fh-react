@@ -21,5 +21,5 @@ Mode estricto, hace que en consola se dispare 2 veces nuestros cambios, esto sol
 https://legacy.reactjs.org/docs/strict-mode.html
 
 
-
+en vez de http-server -o, usar npm run preview
 
