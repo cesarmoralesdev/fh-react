@@ -11,8 +11,8 @@ export const GifExpertApp = () => {
     const onAddCategory = (value) => {
         if (categories.includes(value)) return;
         setCategories([
+            value,
             ...categories,
-            value
         ]);
         //Forma 2: Con esta forma dentro del setState tenemos el valor de estado
         // setCategories(cat => [
