@@ -23,3 +23,5 @@ https://legacy.reactjs.org/docs/strict-mode.html
 
 en vez de http-server -o, usar npm run preview
 
+https://github.com/Klerith/react-vite-gif-expert/tree/fin-seccion-6
+
