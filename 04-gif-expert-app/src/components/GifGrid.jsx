@@ -1,29 +1,17 @@
-import { useEffect, useState } from "react";
-import { getGifs } from "../helpers/getGifs";
 import { GifItem } from "./GifItem";
+import { useFetchGifs } from "../hooks/useFetchGifs";
 
-export const GifGrid = ({ id, title, url }) => {
-
-    const [images, setImages] = useState([]);
-
-    const getImages = async () => {
-        const newImages =  await getGifs(category);
-        setImages(newImages);
-    }
-
-    //solo se ejecuta una vez cuando se crear el componente, Al hacer enter se llama otra vez porque se crea el componente nuevamente en el componente padre
-    useEffect(() => {
-        getImages();
-    }, [])
+export const GifGrid = ({category}) => {
+    const { images, isLoading } = useFetchGifs(category);
 
     return (
         <>
-            <h3>{title}</h3>
+            <h3>{category}</h3>
 
-            <div key={title} className="card-grid">
+            <div key={category} className="card-grid">
                 {
-                    images.map( ({ id,title,url }) => {
-                        return <GifItem id={id} title={title} url={url} />
+                    images.map( image => {
+                        return <GifItem key={image.id} { ...image } />
                     })
                 }
             </div>
