@@ -25,3 +25,11 @@ en vez de http-server -o, usar npm run preview
 
 https://github.com/Klerith/react-vite-gif-expert/tree/fin-seccion-6
 
+
+https://www.npmjs.com/package/http-server
+
+https://docs.github.com/en/enterprise/2.13/user/articles/setting-your-username-in-git
+
+
+
+
