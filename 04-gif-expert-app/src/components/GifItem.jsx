@@ -1,10 +1,8 @@
 export const GifItem = ({ id, title, url }) => {
     return (
-        <>
-            <div>
-                <li key={id}>{title}</li>
-                <img src={url} alt={title} />
-            </div>
-        </>
+        <div className="card">
+            <img src={url} alt={title} />
+            <p>{title}</p>
+        </div>
     )
 }

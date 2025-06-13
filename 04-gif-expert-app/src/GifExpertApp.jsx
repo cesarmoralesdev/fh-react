@@ -22,7 +22,7 @@ export const GifExpertApp = () => {
 
     return (
         <>
-            <h3>GifExpertApp</h3>
+            <h3>GifExpertApp - César Morales</h3>
             <AddCategory
                 // setCategories={setCategories}
                 onNewCategory={value => onAddCategory(value)}
