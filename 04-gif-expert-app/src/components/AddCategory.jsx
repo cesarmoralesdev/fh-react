@@ -1,14 +1,22 @@
 import { useState } from "react";
-
-export const AddCategory = ( { onNewCategory } ) => {
+import { z } from 'zod';
+export const AddCategory = (props) => {
 
     const [inputValue, setInputValue] = useState('');
+
+    const schema = z.object({
+        onNewCategory: z.function(),
+    });
+    const validatedProps = schema.parse(props);
+    const { onNewCategory } = validatedProps;
 
     const onInputChange = ({ target }) => {
         setInputValue(target.value);
     }
 
     const onSubmit = (event) => {
+        console.log("Hola mundo desde submit");
+        
         event.preventDefault();
         if (inputValue.trim().length < 1) return;
         // setCategories( categories => [ ...categories, inputValue ]);
@@ -17,7 +25,7 @@ export const AddCategory = ( { onNewCategory } ) => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} aria-label="form">
             <input
                 type='text'
                 placeholder='Buscar gifs'
