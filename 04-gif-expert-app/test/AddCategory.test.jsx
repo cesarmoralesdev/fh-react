@@ -32,9 +32,11 @@ describe('Pruebas en <AddCategory />', () => {
     test('no debe de llamar el onNewCategory si el input esta vacio', () => {
         const onNewCategory= jest.fn();
         render(<AddCategory onNewCategory={onNewCategory} />);
+        //getByRole es para obtener un elemento por su role como form en este caso 
         const form = screen.getByRole('form');
         fireEvent.submit(form);
         //not.toHaveBeenCalled es para saber si se llamo la funcion
+        expect(onNewCategory).toHaveBeenCalledTimes(0);
         expect(onNewCategory).not.toHaveBeenCalled();
     });
 })
