@@ -31,6 +31,8 @@ https://www.npmjs.com/package/http-server
 
 https://docs.github.com/en/enterprise/2.13/user/articles/setting-your-username-in-git
 
+https://gist.github.com/Klerith/ca7e57fae3c9ab92ad08baadc6c26177
 
+https://react-hooks-testing-library.com/
 
-
+https://github.com/Klerith/react-gif-expert/tree/fin-seccion-8
