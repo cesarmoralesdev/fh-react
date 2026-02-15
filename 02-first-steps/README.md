@@ -16,11 +16,13 @@ styles['item-text']
 caso contrario, asi:
 styles.itemRow
 
-
-
 Codigo fuente del profesor:
 https://github.com/DevTalles-corp/react-first-steps/tree/fin-seccion-04
 
+Anotaciones adicionales
+
+https://docs.google.com/document/d/1WfcyhWYNf9Jms6y7gr7aEqtqBfO-YTAsnlTPbLRrcdo/edit?usp=sharing
+_______________________________________________________________________
 
 Temas puntuales
 En esta sección, se abordarán los fundamentos de React y conceptos esenciales como:
