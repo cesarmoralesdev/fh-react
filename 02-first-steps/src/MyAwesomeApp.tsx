@@ -11,7 +11,7 @@ const address = {
 export const MyAwesomeApp = () => {
     const myStyles: CSSProperties = { backgroundColor: 'red', borderRadius: isActive ? 10 : 20, padding: 10, };
     return (
-        <>
+        <div data-testid="div-app">
             <h1>{firstName}</h1>
             <h3>{lastName}</h3 >
             <p>{favoriteGames.join(', ')}</p>
@@ -20,6 +20,6 @@ export const MyAwesomeApp = () => {
                 style={myStyles}>
                 {JSON.stringify(address)}
             </p>
-        </>
+        </div>
     );
 }
