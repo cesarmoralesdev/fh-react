@@ -11,7 +11,10 @@ interface Props {
 
 export const ItemCounter = ({ name, quantity = 1 }: Props) => {
     let [count, setCount] = useState(quantity);
-    const handleAdd = () => setCount(++count);
+    const handleAdd = () => {
+        console.log('Hola mundo desde ItemCounter');
+        setCount(++count)
+    };
     const handleSubstract = () => {
         if (count === 1) return;
         setCount(--count);
