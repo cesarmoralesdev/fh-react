@@ -5,7 +5,7 @@ import { ItemCounter } from "./ItemCounter";
 describe("ItemCounter", () => {
     test('should render with default values', () => {
         const name = "Test item";
-        render(<ItemCounter name={name} />);
+        render(<ItemCounter name={name} quantity={1} />);
         expect(screen.getByText(name)).toBeDefined();
         expect(screen.getByText(name)).not.toBeNull();
     })
