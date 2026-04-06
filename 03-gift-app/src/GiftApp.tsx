@@ -15,7 +15,6 @@ export const GiftApp = () => {
             <PreviousSearches title="Busquedas previas" searches={["Goku", "Saitama", "Elden King"]} />
             {/* Gif */}
             <GiftList gifs={mockGifs} />
-
         </>
     )
 }

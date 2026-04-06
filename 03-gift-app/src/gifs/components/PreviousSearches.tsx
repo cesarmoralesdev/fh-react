@@ -1,8 +1,10 @@
+import type { FC } from "react";
+
 interface Props {
     title: string;
     searches?: string[];
 }
-export const PreviousSearches = ({ title, searches }: Props) => {
+export const PreviousSearches: FC<Props> = ({ title, searches }: Props) => {
     return (
         <div className="previous-searches">
             <h2>{title}</h2>
