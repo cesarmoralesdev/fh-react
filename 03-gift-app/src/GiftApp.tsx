@@ -1,37 +1,20 @@
+import { GiftList } from "./gifs/components/GiftList"
+import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { mockGifs } from "./mock-data/gifs.mock"
+import { CustomHeader } from "./shared/components/CustomHeader"
+import { SearchBar } from "./shared/components/SearchBar"
 
 export const GiftApp = () => {
     return (
         <>
             {/* Header */}
-            <div className="content-center">
-                <h1>Buscador de Gifs</h1>
-                <p>Descubre y comparte el gift perfecto</p>
-            </div>
+            <CustomHeader title="Buscador de Gifs" description="Descubre y comparte el gift perfecto" />
             {/* Search */}
-            <div className="search-container">
-                <input type="text" placeholder="Buscar gift" />
-                <button>Buscar</button>
-            </div>
+            <SearchBar placeHolder="Buscar gift" buttonText="Buscar" />
             {/* Busquedas previas */}
-            <div className="previous-searches">
-                <h2>Busquedas previas</h2>
-                <ul className="previous-searches-list">
-                    <li>Goku</li>
-                    <li>Saitama</li>
-                    <li>Elden King</li>
-                </ul>
-            </div>
+            <PreviousSearches title="Busquedas previas" searches={["Goku", "Saitama", "Elden King"]} />
             {/* Gif */}
-            <div className="gifs-container">
-                {mockGifs.map(gif => (
-                    <div key={gif.id} className="gift-card">
-                        <img src={gif.url} alt={gif.title} width={gif.width} height={gif.height} />
-                        <h3>{gif.title}</h3>
-                        <p>{gif.width}x{gif.height} (1.5mb)</p>
-                    </div>
-                ))}
-            </div>
+            <GiftList gifs={mockGifs} />
 
         </>
     )
