@@ -11,11 +11,26 @@ export const SearchBar: FC<Props> = ({ placeHolder = 'Buscar', onSearch, buttonT
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
     }
-
+    const handleSearch = () => {
+        onSearch(search);
+        setSearch("");
+    }
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") handleSearch();
+    };
     return (
         <div className="search-container">
-            <input type="text" placeholder={placeHolder} onChange={handleChange} />
-            <button onClick={() => onSearch(search)}> {buttonText ?? "Buscar"} </button>
+            <input
+                type="text" 
+                placeholder={placeHolder} 
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                value={search}
+            />
+            <button 
+                onClick={handleSearch}> 
+                {buttonText ?? "Buscar"}
+            </button>
         </div>
     )
 }
