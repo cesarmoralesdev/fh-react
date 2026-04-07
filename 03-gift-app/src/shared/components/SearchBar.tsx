@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 
 interface Props {
     placeHolder: string;
@@ -18,6 +18,19 @@ export const SearchBar: FC<Props> = ({ placeHolder = 'Buscar', onSearch, buttonT
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") handleSearch();
     };
+
+    useEffect(() => {
+        //Implementacion de debounce para evitar que se dispare la busqueda cada vez que el usuario escribe una letra, se dispara despues de 700ms de que el usuario deje de escribir
+        const timeoutId = setTimeout(() => {
+            onSearch(search);
+        }, 700);
+        return () => {
+            //se dispara cada vez que el componente se desmonta o antes de que se ejecute el efecto nuevamente
+            // console.log('Funcion de limpieza');
+            clearTimeout(timeoutId);
+        };
+    }, [search, onSearch]);
+
     return (
         <div className="search-container">
             <input
