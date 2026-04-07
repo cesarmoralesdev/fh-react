@@ -12,7 +12,7 @@ export const SearchBar: FC<Props> = ({ placeHolder = 'Buscar', onSearch, buttonT
         setSearch(event.target.value);
     }
     const handleSearch = () => {
-        onSearch(search);
+        onSearch(search.toLocaleLowerCase().trim());
         setSearch("");
     }
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -22,7 +22,7 @@ export const SearchBar: FC<Props> = ({ placeHolder = 'Buscar', onSearch, buttonT
     useEffect(() => {
         //Implementacion de debounce para evitar que se dispare la busqueda cada vez que el usuario escribe una letra, se dispara despues de 700ms de que el usuario deje de escribir
         const timeoutId = setTimeout(() => {
-            onSearch(search);
+            console.log(search);
         }, 700);
         return () => {
             //se dispara cada vez que el componente se desmonta o antes de que se ejecute el efecto nuevamente

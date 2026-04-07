@@ -11,9 +11,9 @@ export const GiftApp = () => {
     const handleTermClicked = (term: string) => {
         console.log(term);
     }
-    const handleSearch = (term: string) => {
+    const handleSearch = (term: string = '') => {
         if (!term || previousSearches.includes(term)) return;
-        setPreviousSearches(prev => [...prev, term]);
+        setPreviousSearches(prev => [term, ...prev].slice(0, 7));
     }
 
     return (
