@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { GiftList } from "./gifs/components/GiftList"
 import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { mockGifs } from "./mock-data/gifs.mock"
@@ -5,14 +6,24 @@ import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"
 
 export const GiftApp = () => {
+    const [previousSearches, setPreviousSearches] = useState<string[]>(["Goku", "Saitama", "Elden King"]); // TODO: Implementar estado para busquedas previas
+
+    const handleTermClicked = (term: string) => {
+        console.log(term);
+    }
+    const handleSearch = (term: string) => {
+        if (!term || previousSearches.includes(term)) return;
+        setPreviousSearches(prev => [...prev, term]);
+    }
+
     return (
         <>
             {/* Header */}
             <CustomHeader title="Buscador de Gifs" description="Descubre y comparte el gift perfecto" />
             {/* Search */}
-            <SearchBar placeHolder="Buscar gift" buttonText="Buscar" />
+            <SearchBar placeHolder="Buscar gift" buttonText="Buscar" onSearch={handleSearch} />
             {/* Busquedas previas */}
-            <PreviousSearches title="Busquedas previas" searches={["Goku", "Saitama", "Elden King"]} />
+            <PreviousSearches title="Busquedas previas" searches={previousSearches} onTermClicked={handleTermClicked} />
             {/* Gif */}
             <GiftList gifs={mockGifs} />
         </>
