@@ -12,7 +12,7 @@ export const SearchBar: FC<Props> = ({ placeHolder = 'Buscar', onSearch, buttonT
         setSearch(event.target.value);
     }
     const handleSearch = () => {
-        onSearch(search.toLocaleLowerCase().trim());
+        onSearch(search);
         setSearch("");
     }
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

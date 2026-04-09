@@ -13,9 +13,11 @@ export const GiftApp = () => {
         console.log(term);
     }
     const handleSearch = async (term: string = '') => {
+        term = term.toLocaleLowerCase().trim()
         if (!term || previousSearches.includes(term)) return;
-        setPreviousSearches(prev => [term, ...prev].slice(0, 7));
-        await getGifsBySearch("saitama");
+        setPreviousSearches(prev => [term, ...prev].slice(0, 8));
+        const gifs = await getGifsBySearch(term);
+        console.log(gifs);
     }
 
     return (
