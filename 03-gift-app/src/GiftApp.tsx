@@ -5,9 +5,11 @@ import { mockGifs } from "./mock-data/gifs.mock"
 import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"
 import { getGifsBySearch } from "./gifs/actions/get-gifs-by-search.action"
+import type { Gif } from "./gifs/interfaces/gifs.interface"
 
 export const GiftApp = () => {
     const [previousSearches, setPreviousSearches] = useState<string[]>(["Goku", "Saitama", "Elden King"]); // TODO: Implementar estado para busquedas previas
+    const [listGifs, setListGifs] = useState<Gif[]>([]);
 
     const handleTermClicked = (term: string) => {
         console.log(term);
@@ -17,7 +19,7 @@ export const GiftApp = () => {
         if (!term || previousSearches.includes(term)) return;
         setPreviousSearches(prev => [term, ...prev].slice(0, 8));
         const gifs = await getGifsBySearch(term);
-        console.log(gifs);
+        setListGifs(gifs);
     }
 
     return (
@@ -29,7 +31,7 @@ export const GiftApp = () => {
             {/* Busquedas previas */}
             <PreviousSearches title="Busquedas previas" searches={previousSearches} onTermClicked={handleTermClicked} />
             {/* Gif */}
-            <GiftList gifs={mockGifs} />
+            {listGifs.length > 0 && <GiftList gifs={listGifs} />}
         </>
     )
 }
