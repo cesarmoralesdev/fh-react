@@ -9,15 +9,20 @@ import type { Gif } from "./gifs/interfaces/gifs.interface"
 export const GiftApp = () => {
     const [previousSearches, setPreviousSearches] = useState<string[]>([]);
     const [gifs, setGifs] = useState<Gif[]>([]);
+    const [historyGifs, setHistoryGifs] = useState({} as Record<string, Gif[]>);
 
     const handleTermClicked = (term: string) => {
-        console.log(term);
+        const gifs = historyGifs[term];
+        if (gifs) {
+            setGifs(gifs);
+        }
     }
     const handleSearch = async (term: string = '') => {
         term = term.toLocaleLowerCase().trim()
         if (!term || previousSearches.includes(term)) return;
         setPreviousSearches(prev => [term, ...prev].slice(0, 8));
         const gifs = await getGifsBySearch(term);
+        setHistoryGifs(prev => ({ ...prev, [term]: gifs }));
         setGifs(gifs);
     }
 
