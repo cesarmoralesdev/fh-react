@@ -5,7 +5,7 @@ import { SearchBar } from "./shared/components/SearchBar"
 import { useGifs } from "./gifs/hooks/useGifs"
 
 export const GiftApp = () => {
-    const { previousSearches, gifs, handleTermClickedCacheFueraHook, handleSearch } = useGifs();
+    const { previousSearches, gifs, handleTermClickedCacheHookUseRef, handleSearch } = useGifs();
 
     return (
         <>
@@ -14,7 +14,7 @@ export const GiftApp = () => {
             {/* Search */}
             <SearchBar placeHolder="Buscar gift" buttonText="Buscar" onSearch={handleSearch} />
             {/* Busquedas previas */}
-            <PreviousSearches title="Busquedas previas" searches={previousSearches} onTermClicked={handleTermClickedCacheFueraHook} />
+            <PreviousSearches title="Busquedas previas" searches={previousSearches} onTermClicked={handleTermClickedCacheHookUseRef} />
             {/* Gif */}
             {gifs.length > 0 && <GiftList gifs={gifs} />}
         </>
