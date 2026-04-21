@@ -6,7 +6,7 @@ import { MyCounterApp } from './counter/components/MyCounterApp.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* <GiftApp /> */}
-    <MyCounterApp />
+    <GiftApp />
+    {/* <MyCounterApp /> */}
   </StrictMode>,
 )

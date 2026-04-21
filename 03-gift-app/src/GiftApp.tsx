@@ -1,30 +1,11 @@
-import { useState } from "react"
 import { GiftList } from "./gifs/components/GiftList"
 import { PreviousSearches } from "./gifs/components/PreviousSearches"
 import { CustomHeader } from "./shared/components/CustomHeader"
 import { SearchBar } from "./shared/components/SearchBar"
-import { getGifsBySearch } from "./gifs/actions/get-gifs-by-search.action"
-import type { Gif } from "./gifs/interfaces/gifs.interface"
+import { useGifs } from "./gifs/hooks/useGifs"
 
 export const GiftApp = () => {
-    const [previousSearches, setPreviousSearches] = useState<string[]>([]);
-    const [gifs, setGifs] = useState<Gif[]>([]);
-    const [historyGifs, setHistoryGifs] = useState({} as Record<string, Gif[]>);
-
-    const handleTermClicked = (term: string) => {
-        const gifs = historyGifs[term];
-        if (gifs) {
-            setGifs(gifs);
-        }
-    }
-    const handleSearch = async (term: string = '') => {
-        term = term.toLocaleLowerCase().trim()
-        if (!term || previousSearches.includes(term)) return;
-        setPreviousSearches(prev => [term, ...prev].slice(0, 8));
-        const gifs = await getGifsBySearch(term);
-        setHistoryGifs(prev => ({ ...prev, [term]: gifs }));
-        setGifs(gifs);
-    }
+    const { previousSearches, gifs, handleTermClickedCacheFueraHook, handleSearch } = useGifs();
 
     return (
         <>
@@ -33,7 +14,7 @@ export const GiftApp = () => {
             {/* Search */}
             <SearchBar placeHolder="Buscar gift" buttonText="Buscar" onSearch={handleSearch} />
             {/* Busquedas previas */}
-            <PreviousSearches title="Busquedas previas" searches={previousSearches} onTermClicked={handleTermClicked} />
+            <PreviousSearches title="Busquedas previas" searches={previousSearches} onTermClicked={handleTermClickedCacheFueraHook} />
             {/* Gif */}
             {gifs.length > 0 && <GiftList gifs={gifs} />}
         </>
