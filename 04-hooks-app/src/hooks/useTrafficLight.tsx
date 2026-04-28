@@ -28,8 +28,8 @@ export const useTrafficLight = () => {
     }, [counteDown]);
 
     useEffect(() => {
-        if(counteDown > 0) return;
-        if (counteDown === 0){
+        if (counteDown > 0) return;
+        if (counteDown === 0) {
             setLight(prev => {
                 if (prev === 'red') return 'green';
                 if (prev === 'green') return 'yellow';
@@ -38,10 +38,18 @@ export const useTrafficLight = () => {
             });
             setCountdown(5);
             return;
-        };        
+        };
     }, [counteDown, light]);
 
     return {
-        light, colors, counteDown
+        //Props
+        counteDown,
+        //Computed
+        percentage: (5 - counteDown) * 20,
+        greenLight: light === 'green' ? colors.green : colors.reset,
+        yellowLight: light === 'yellow' ? colors.yellow : colors.reset,
+        redLight: light === 'red' ? colors.red : colors.reset,
+
+        //Methods
     };
 }
