@@ -17,11 +17,17 @@ export type TaskAction =
     | { type: 'DELETE_TODO', payload: number }
 
 export const getTasksInitialState = (): TaskState => {
+    const localStorageState = localStorage.getItem('tasks-state')
+    if (!localStorageState) {
+        return {
+            todos: [],
+            completed: 0,
+            pending: 0,
+            length: 0,
+        };
+    }
     return {
-        todos: [],
-        completed: 0,
-        pending: 0,
-        length: 0,
+        ...JSON.parse(localStorageState),
     };
 }
 
