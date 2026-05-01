@@ -29,25 +29,31 @@ export const tasksReducer = (state: TaskState, action: TaskAction): TaskState =>
             return {
                 ...state,
                 todos: [...state.todos, newTodo],
-                length: state.length + 1
+                length: state.length + 1,
+                pending: state.pending + 1
             };
         }
-        case 'DELETE_TODO':
+        case 'DELETE_TODO': {
             const filteredTodos = state.todos.filter(todo => todo.id !== action.payload.id);
+            const completed = filteredTodos.filter(todo => todo.completed);
             return {
                 ...state,
                 todos: filteredTodos,
-                length: state.length - 1
+                length: filteredTodos.length,
+                completed: completed.length,
+                pending: state.todos.length - completed.length,
             };
+        }
         case 'TOGGLE_TODO':
             const updatedTodos = state.todos.map(todo =>
                 todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
             );
+            const completed = updatedTodos.filter(todo => todo.completed);
             return {
                 ...state,
                 todos: updatedTodos,
-                completed: updatedTodos.filter(todo => todo.completed).length,
-                pending: updatedTodos.filter(todo => !todo.completed).length
+                completed: completed.length,
+                pending: state.todos.length - completed.length,
             };
         default:
             return state;
