@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { SkipForward, Play } from 'lucide-react';
+import confetti from "canvas-confetti";
 
 const GAME_WORDS = [
     'REACT',
@@ -61,34 +62,52 @@ export const ScrambleWords = () => {
         e.preventDefault();
         // Implementar lógica de juego
         if (guess === currentWord) {
+            const newWords = words.slice(1);
+
+            confetti({
+                particleCount: 100,
+                spread: 120,
+                origin: { y: 0.6 }
+            });
+
             setPoints(points + 1);
-        } else {
-            if (errorCounter + 1 === 3) {
-                setIsGameOver(true);
-            }
-            setErrorCounter(errorCounter + 1);
+            setGuess('');
+            setWords(newWords);
+            setCurrentWord(newWords[0]);
+            setScrambledWord(scrambleWord(newWords[0]));
+            return;
         }
-        setScrambledWord(scrambleWord(currentWord));
+        if (errorCounter + 1 >= maxAllowErrors) {
+            setIsGameOver(true);
+        }
+        setErrorCounter(errorCounter + 1);
+        setGuess('');
     };
 
     const handleSkip = () => {
-        setCurrentWord(currentWord + 1);
-        setScrambledWord(scrambleWord(currentWord));
-        if (skipCounter + 1 === 3) {
+        if (skipCounter >= maxSkips) {
             setIsGameOver(true);
+            return;
         }
+        const updateWords = words.splice(1);
         setSkipCounter(skipCounter + 1);
+        setWords(updateWords);
+        setCurrentWord(updateWords[0]);
+        setScrambledWord(scrambleWord(updateWords[0]));
+        setGuess('');
     };
 
     const handlePlayAgain = () => {
+        const newArray = shuffleArray(GAME_WORDS);
         console.log('Jugar de nuevo');
-        setGuess("");
-        setIsGameOver(false);
         setPoints(0);
         setErrorCounter(0);
-        setWords(shuffleArray(GAME_WORDS));
+        setGuess("");
+        setWords(newArray);
         setCurrentWord(words[0]);
-        setScrambledWord(scrambleWord(currentWord));
+        setIsGameOver(false);
+        setScrambledWord(scrambleWord(newArray[0]));
+        setSkipCounter(0);
     };
 
     //! Si ya no hay palabras para jugar, se muestra el mensaje de fin de juego
