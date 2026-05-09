@@ -9,12 +9,13 @@
     }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-    "strict": true
+    "strict": true,
+    "types": ["node"],
   }
 }
