@@ -1,3 +1,5 @@
+import confetti from "canvas-confetti";
+
 export interface ScrambleWordState {
     currentWord: string;
     errorCounter: number;
@@ -57,23 +59,49 @@ export const getInitialState = (): ScrambleWordState => {
         maxAllowErrors: 3,
         maxSkips: 3,
         points: 0,
-        scrambledWord: "",
+        scrambledWord: scrambleWord(shuffledWords[0]),
         skipCounter: 0,
         words: shuffledWords,
         totalWords: shuffledWords.length
     };
 }
 
-export type ScrambleWordsAction = 
-| { type: 'NO_TENGO_IDEA_DE_QUE_ACCIONES_NECESITO_1' }
-| { type: 'NO_TENGO_IDEA_DE_QUE_ACCIONES_NECESITO_2' }
-| { type: 'NO_TENGO_IDEA_DE_QUE_ACCIONES_NECESITO_3' };
-export const scrambleWordsReducer = ( state: ScrambleWordState, action: ScrambleWordsAction ) => {
+export type ScrambleWordsAction =
+    | { type: 'SET_GUESS', payload: string }
+    | { type: 'CHECK_ANSWER' }
+    | { type: 'NO_TENGO_IDEA_DE_QUE_ACCIONES_NECESITO_3' };
+export const scrambleWordsReducer = (state: ScrambleWordState, action: ScrambleWordsAction): ScrambleWordState => {
     switch (action.type) {
-        // case value:
-            
-        //     break;
-    
+        case 'SET_GUESS':
+            return {
+                ...state,
+                guess: action.payload.trim().toUpperCase(),
+            }
+        case 'CHECK_ANSWER': {
+            if (state.guess === state.currentWord) {
+                const newWords = state.words.slice(1);
+                confetti({
+                    particleCount: 100,
+                    spread: 120,
+                    origin: { y: 0.6 }
+                });
+                return {
+                    ...state,
+                    points: state.points + 1,
+                    guess: '',
+                    words: newWords,
+                    currentWord: newWords[0],
+                    scrambledWord: scrambleWord(newWords[0]),
+                }
+            }
+            return {
+                ...state,
+                errorCounter: state.errorCounter + 1,
+                guess: "",
+                isGameOver: state.errorCounter + 1 >= state.maxAllowErrors,
+            };
+        }
+
         default:
             return state;
     }
