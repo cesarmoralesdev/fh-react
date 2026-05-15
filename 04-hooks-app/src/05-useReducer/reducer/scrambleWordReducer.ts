@@ -1,5 +1,3 @@
-import confetti from "canvas-confetti";
-
 export interface ScrambleWordState {
     currentWord: string;
     errorCounter: number;
@@ -81,11 +79,6 @@ export const scrambleWordsReducer = (state: ScrambleWordState, action: ScrambleW
         case 'CHECK_ANSWER': {
             if (state.guess === state.currentWord) {
                 const newWords = state.words.slice(1);
-                confetti({
-                    particleCount: 100,
-                    spread: 120,
-                    origin: { y: 0.6 }
-                });
                 return {
                     ...state,
                     points: state.points + 1,
