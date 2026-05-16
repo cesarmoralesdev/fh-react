@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useOptimistic, useRef, useState } from 'react';
 
 interface Comment {
     id: number;
@@ -12,15 +12,31 @@ export const InstagromApp = () => {
         { id: 1, text: '¡Gran foto!' },
         { id: 2, text: 'Me encanta 🧡' },
     ]);
+    const [optimisticComment, addOptimisticComment] = useOptimistic(comments, (currentComments, newCommentText: string) => {
+        return [
+            ...currentComments,
+            {
+                id: comments.length + 1,
+                text: newCommentText,
+                optimistic: true,
+            }
+        ];
+    });
+
 
     const handleAddComment = async (formData: FormData) => {
-        const newComment: Comment = {
-            id: comments.length + 1,
-            text: formData.get("post-message")?.toString() || ''
-        };
-        setComments([
-            ...comments,
-            newComment,
+        const messageText: string = formData.get("post-message")?.toString() || '';
+        addOptimisticComment(messageText);
+
+        //Simular la peticion http al servidor
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
+        setComments(prev => [
+            ...prev,
+            {
+                id: comments.length + 1,
+                text: messageText
+            }
         ]);
     };
 
@@ -46,7 +62,7 @@ export const InstagromApp = () => {
 
             {/* Comentarios */}
             <ul className="flex flex-col items-start justify-center bg-gray-300 w-[500px] p-4">
-                {comments.map((comment) => (
+                {optimisticComment.map((comment) => (
                     <li key={comment.id} className="flex items-center gap-2 mb-2">
                         <div className="bg-blue-500 rounded-full w-10 h-10 flex items-center justify-center">
                             <span className="text-white text-center">A</span>
