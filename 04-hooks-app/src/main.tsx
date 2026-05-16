@@ -11,6 +11,7 @@ import { TasksApp } from './05-useReducer/TaskApp'
 import { ScrambleWords } from './05-useReducer/ScrambleWords'
 import { MemoHook } from './06-memos/MemoHook'
 import { MemoCounter } from './06-memos/MemoCounter'
+import { InstagromApp } from './07-useOptimistic/InstagromApp'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <TasksApp /> */}
     {/* <ScrambleWords /> */}
     {/* <MemoHook /> */}
-    <MemoCounter />
+    {/* <MemoCounter /> */}
+    <InstagromApp />
   </StrictMode>,
 )
