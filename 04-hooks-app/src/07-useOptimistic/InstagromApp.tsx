@@ -1,4 +1,5 @@
-import { useEffect, useOptimistic, useRef, useState } from 'react';
+import { cn } from '@/lib/utils';
+import { useEffect, useOptimistic, useRef, useState, useTransition } from 'react';
 
 interface Comment {
     id: number;
@@ -8,6 +9,9 @@ interface Comment {
 
 export const InstagromApp = () => {
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const [isPending, startTransition] = useTransition();
+
     const [comments, setComments] = useState<Comment[]>([
         { id: 1, text: '¡Gran foto!' },
         { id: 2, text: 'Me encanta 🧡' },
@@ -28,16 +32,20 @@ export const InstagromApp = () => {
         const messageText: string = formData.get("post-message")?.toString() || '';
         addOptimisticComment(messageText);
 
-        //Simular la peticion http al servidor
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        startTransition(async () => {
+            //Simular la peticion http al servidor
+            await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        setComments(prev => [
-            ...prev,
-            {
-                id: comments.length + 1,
-                text: messageText
-            }
-        ]);
+            setComments(prev => [
+                ...prev,
+                {
+                    id: comments.length + 1,
+                    text: messageText
+                }
+            ]);
+
+        })
+
     };
 
     useEffect(() => {
@@ -90,8 +98,14 @@ export const InstagromApp = () => {
                 />
                 <button
                     type="submit"
-                    disabled={false}
-                    className="bg-blue-500 text-white p-2 rounded-md w-full"
+                    disabled={isPending}
+                    className={cn(
+                        'text-white p-2 rounded-md w-full',
+                        {
+                            "bg-blue-500": !isPending,
+                            "bg-gray-400": isPending,
+                        }
+                    )}
                 >
                     Enviar
                 </button>
