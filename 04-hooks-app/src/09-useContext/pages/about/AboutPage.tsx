@@ -23,7 +23,7 @@ export const AboutPage = () => {
                         Salir
                     </Button>
                     :
-                    <Link to='/auth' className="hover:text-blue-500 underline text-2xl">Iniciar sesion</Link>
+                    <Link to='/login' className="hover:text-blue-500 underline text-2xl">Iniciar sesion</Link>
                 }
 
             </div>
