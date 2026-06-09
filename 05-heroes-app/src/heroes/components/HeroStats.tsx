@@ -16,7 +16,6 @@ export const HeroStats = () => {
                     </Badge>
                 </div>
             </HeroStatsCard>
-
             <HeroStatsCard title="Favorities" icon={<Heart className="h-4 w-4 text-muted-foreground" />} >
                 <div className="text-2xl font-bold text-red-600">3</div>
                 <p className="text-xs text-muted-foreground">18.8% of total</p>
