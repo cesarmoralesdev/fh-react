@@ -2,7 +2,6 @@ import { AdminLayout } from "@/admin/layouts/AdminLayout";
 import { AdminPage } from "@/admin/pages/AdminPage";
 import { HeroesLayout } from "@/heroes/layouts/HeroesLayout";
 import HeroPage from "@/heroes/pages/hero/HeroPage";
-import { HomePage } from "@/heroes/pages/home/HomePage";
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
 // import { SearchPage } from "@/heroes/pages/search/SearchPage";
@@ -15,7 +14,7 @@ export const appRouter = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <HomePage />
+                element: <HeroPage />
             },
             {
                 path: '/heroes/1',

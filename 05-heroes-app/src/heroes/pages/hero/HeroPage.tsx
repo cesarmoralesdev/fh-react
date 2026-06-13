@@ -5,6 +5,7 @@ import { SearchControls } from "../search/ui/SearchControls"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { useState } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
+import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
 
 export default function HeroPage() {
   const [activeTab, setActiveTab] = useState<'all' | 'favorites' | 'heroes' | 'villains'>('all');
@@ -13,6 +14,9 @@ export default function HeroPage() {
       <>
         {/* Header */}
         <CustomJumbotron title="Superhero Universe" description="Discover, explore, and manage your favorite superheroes and villains" />
+
+        {/* Breadcrumbs */}
+        <CustomBreadcrumbs currentPage="Super heroes" />
 
         {/* Stats Dashboard */}
         <HeroStats />
