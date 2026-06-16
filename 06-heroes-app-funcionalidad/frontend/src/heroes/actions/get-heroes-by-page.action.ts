@@ -7,7 +7,7 @@ export const getHeroesByPageAction = async () : Promise<HeroesResponse> => {
     const { data } = await heroApi.get<HeroesResponse>('/');
     const heroes = data.heroes.map( hero => ({
         ...hero,
-        image: `${BASE_URL}/images/1.jpeg`
+        image: `${BASE_URL}/images/${hero.image}`
 
     }))
     return {

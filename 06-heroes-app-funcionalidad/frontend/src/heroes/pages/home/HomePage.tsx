@@ -8,6 +8,7 @@ import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
+import type { Hero } from "@/heroes/types/hero.interface"
 
 
 export const HomePage = () => {
@@ -17,14 +18,11 @@ export const HomePage = () => {
   //   getHeroesByPageAction().then()
   // }, []);
 
-  const { data } = useQuery({
+  const { data: heroesResponse } = useQuery({
     queryKey: ['heroes'],
     queryFn: () => getHeroesByPageAction(),
     staleTime: 1000 * 60 * 5,
   })
-
-  console.log(data);
-  
 
   return (
     <>
@@ -60,19 +58,19 @@ export const HomePage = () => {
           </TabsList>
           <TabsContent value="all">
             <h1>Todos los personajes</h1>
-            <HeroGrid />
+            <HeroGrid heroes={heroesResponse?.heroes ?? []}  />
           </TabsContent>
           <TabsContent value="favorites">
             <h1>Favoritos!!!</h1>
-            <HeroGrid />
+            <HeroGrid heroes={[]} />
           </TabsContent>
           <TabsContent value="heroes">
             <h1>Heroes!!!</h1>
-            <HeroGrid />
+            <HeroGrid heroes={[]} />
           </TabsContent>
           <TabsContent value="villains">
             <h1>Villanos!!!</h1>
-            <HeroGrid />
+            <HeroGrid heroes={[]} />
           </TabsContent>
         </Tabs>
 
