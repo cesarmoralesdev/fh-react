@@ -4,25 +4,31 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Heart, Eye, Zap, Brain, Gauge, Shield } from "lucide-react"
 import type { Hero } from "../types/hero.interface"
+import { useNavigate } from "react-router"
 
 export const HeroGridCard = ({ hero }: { hero: Hero }) => {
+    const navigate = useNavigate();
     const {
         name, alias, description, status, universe, category, team,
         strength, intelligence, speed, durability, firstAppearance, powers, image, slug,
     } = hero;
+    const handleClick = () => {
+        navigate(`/heroes/${slug}`);
+    }
     return (
         <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
-            <div className="relative h-64 overflow-hidden">
+            <div className="relative h-64">
                 {/* ?height=300&width=300`} */}
                 <img
                     src={image}
-                    alt={slug}
-                    className="object-cover transition-all duration-500 group-hover:scale-110"
+                    alt={name}
+                    className="object-cover transition-all duration-500 group-hover:scale-110 absolute top-[-30px] w-full h-[410px]"
+                    onClick={handleClick}
                 />
 
                 {/* Status indicator */}
                 <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <div className={`w-3 h-3 rounded-full ${status === 'active' ? 'bg-green-500' : 'bg-red-500'}`} />
+                    <div className={`w-3 h-3 rounded-full ${status === 'Active' ? 'bg-green-500' : 'bg-red-500'}`} />
                     <Badge variant="secondary" className="text-xs bg-white/90 text-gray-700">
                         {status}
                     </Badge>
@@ -49,7 +55,7 @@ export const HeroGridCard = ({ hero }: { hero: Hero }) => {
                 </Button>
             </div>
 
-            <CardHeader className="pb-3">
+            <CardHeader className="py-3 z-10 bg-gray-100/50 backdrop-blur-sm relative top-1 group-hover:top-[-10px] transition-all duration-300">
                 <div className="flex justify-between items-start">
                     <div className="space-y-1">
                         <h3 className="font-bold text-lg leading-tight">{alias}</h3>
