@@ -1,12 +1,12 @@
+import { useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { SearchControls } from "../search/ui/SearchControls"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
-import { useEffect, useState } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs"
-import { useQuery } from "@tanstack/react-query"
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
 
 
@@ -22,6 +22,9 @@ export const HomePage = () => {
     queryFn: () => getHeroesByPageAction(),
     staleTime: 1000 * 60 * 5,
   })
+
+  console.log(data);
+  
 
   return (
     <>
