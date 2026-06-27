@@ -1,4 +1,4 @@
-import { useParams } from "react-router"
+import { Navigate, useParams } from "react-router"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -26,8 +26,14 @@ const superheroDataDefault = {
 
 export default function HeroPage() {
   const { idSlug = '' } = useParams();
-  const { data: superheroData } = useHero(idSlug);
-  if (!superheroData) return null;
+  const { data: superheroData, isError } = useHero(idSlug);
+  if(isError){
+    return <Navigate to="/" />
+  }
+  
+  if (!superheroData){
+    return <h3>Loading...</h3>
+  }
   const totalPower =
     superheroData.strength + superheroData.intelligence + superheroData.speed + superheroData.durability
   const averagePower = Math.round((totalPower / 4) * 10)

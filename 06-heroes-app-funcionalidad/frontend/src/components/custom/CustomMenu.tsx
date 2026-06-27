@@ -7,7 +7,7 @@ export const CustomMenu = () => {
     const isActive = (path: string) => path === pathname;
 
     return (
-        <NavigationMenu>
+        <NavigationMenu className="py-5">
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <NavigationMenuLink asChild className={cn(
